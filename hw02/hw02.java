@@ -18,17 +18,17 @@ public class hw02{
     double totalGlassCost$=(nGlasses*glassCost$); //total cost of glasses
     double totalEnvelopeCost$=(nEnvelopes*envelopeCost$); //total cost of envelopes 
     
-    double totalbeforetax=((totalEnvelopeCost$+totalGlassCost$+totalSockCost$)*100);//total cost before tax
+    double totalbeforetax=((totalEnvelopeCost$+totalGlassCost$+totalSockCost$)*100);//total cost before tax *100 for decimal places
     totalbeforetax=(int)totalbeforetax;
-    totalbeforetax=totalbeforetax/100;
+    totalbeforetax=totalbeforetax/100;   //the two lines converted into an int and then divided it by 100 to get it into a number w/ 2 decimal places
     
     double totalprice=((totalbeforetax*taxPercent)*100); //total cost after tax
     totalprice=(int)totalprice;
-    totalprice=totalprice/100;
+    totalprice=totalprice/100;   //the two lines converted into an int and then divided it by 100 to get it into a number w/ 2 decimal places
    
     double totaltax= ((totalprice-totalbeforetax)*100); 
     totaltax=(int)totaltax;
-    totaltax=totaltax/100;
+    totaltax=totaltax/100    //the two lines converted into an int and then divided it by 100 to get it into a number w/ 2 decimal places
     
     System.out.println("number of socks = "+nSocks+"  cost = $"+totalSockCost$+""); //displays number of socks + total price for items
     System.out.println("number of glasses ="+nGlasses+"  cost = $"+totalGlassCost$+""); // number of glasses +total price for items
