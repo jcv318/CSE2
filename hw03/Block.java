@@ -7,7 +7,7 @@ public static void main(String[] args) {
    	Scanner myScanner = new Scanner ( System.in ) ; //construct my own scanner
    	
    	System.out.print("Enter the length of the block"); //prompts user to enter desired value
-   	double length = myScanner.nextDouble(); //tells scanner to take previous imput to be check cost
+   	double length = myScanner.nextDouble(); //tells scanner to take the value from the user's awnser to the prompt
    	
    		System.out.print("Enter the width of the block"); //see line 9
    	double width = myScanner.nextDouble(); //see line 10
