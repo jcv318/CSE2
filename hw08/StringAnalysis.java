@@ -8,6 +8,8 @@ to enter a string, and then ask them if they want to evaluate a certain
 number of characters or the entire string. Depending on whether they entered
 a string or they chose to evaluate, a certain method (all under the same name)
 will evaluate it, and tell the user if it is all letters or not.
+
+s/o 2 mike
 */
     
     
