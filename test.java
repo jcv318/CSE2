@@ -1,79 +1,86 @@
-import java.util.Scanner;   //import Scanner
-public class test{
-    //the following is the method charAnalysis for a String as input
-    public static boolean charAnalysis(String input){
-        int length = input.length();    //quantifies the length of input
-        int i = 0;                      //this will be the variable incremented in the loops
-        while (i<length){               //while i is less than the length
-            char ch = input.charAt(i);      //the variable ch will be the char character at the position in the String defined by i
-            if(!Character.isLetter(ch)){    //if it comes across a char character that is not a letter while checking all the positions, break out of the loop
-                break;
-            }
-            i++;                        //while in the loop, increment i each time
-        }//ends loop
-        if(i==length){          //if, at the end of the loop, i==length, then the loop was never broken from, and all of the positions had letters
-            return true;        //thus, this method will return the boolean true
-        }
-        else{                   //if i doesn't equal length, then the loop was broken from at some point, so at least one position was not a letter
-            return false;       //thus, this method will return the boolean value false
-        }
-    }//ends method
-    //because of the concept of method override, this following method has the same name and does essentially the same thing, but accepts a String and an int
-    public static boolean charAnalysis(String input, int number){ 
-        int length = input.length();    //same as previous method
-        int i = 0;                      //same as previous method
-        while(i<number && i<length){    //modifying the previous method, we must also chech that i is less than the int value given by the user... it will stop the loop if i becomes greater than either length or number
-            char ch = input.charAt(i);      //the rest of the loop is identical to the previous method
-            if(!Character.isLetter(ch)){
-                break;
-            }
-            i++;
-        }//ends loop
-        if(i>=number || i==length){     //same as previous, but now if i>=number, it will also return true
-            return true;                //this is because that means that the number of positions the user wanted to check are all letters, and if more than that were letters, the user's specified amount is still true
-        }
-        else{                           //if none of the conditions above are met, that means that not all of the positions checked were letters
-            return false;
-        }
-    }//ends method
-    //this is the start of the main method
-    public static void main(String[] args){
-        Scanner scan = new Scanner (System.in);     //declare Scanner
-        System.out.print("Enter a string to be evaluated: ");
-        String userInput = scan.next();
-        System.out.println("If you would like to evaluate the entire string, input 'all'.");
-        System.out.print("Otherwise, input the number of characters you would like to evaluate: ");
-        boolean acceptable = false;
-        while(!acceptable){ 
-            if (scan.hasNextInt()){
-                int numOfChar = scan.nextInt(); //if the input is an integer, assign it to the variable numOfChar
-                if(numOfChar>0){                //if it is greater than 0, execute the method charAnalysis on the 2 variables
-                    if(charAnalysis(userInput,numOfChar)){      //if the method outputs true, it means that the specified number of positions are all letters, so print that
-                        System.out.println("These are letters.");
-                    }
-                    else{                                       //otherwise, that means the method ouput false, so the specified number of positions are not all letters
-                        System.out.println("These are not all letters.");
-                    }
-                acceptable = true;      //set acceptable equal to true to exit the loop
-                }
-                else{
-                    System.out.println("Please input a positive integer, or input 'all'."); //if numOfChar<0, loop again, prompting for correct input
-                }
-            }
-            else if(scan.hasNext("all")){   //if the user doesn't input an integer, but rather inputs "all", execute the method charAnalysis on userInput
-                if(charAnalysis(userInput)){    //if the method outputs true, it means that they are all letters
-                    System.out.println("These are all letters.");
-                }
-                else{                           //otherwise, the method output false, so they are not all letters
-                    System.out.println("These are not all letters.");
-                }
-                acceptable = true;      //set acceptable equal to true and exit the loop
-            }
-            else{           //otherwise, it means that an integer or the word "all" was not input
-                System.out.println("Please input a positive integer, or input 'all'."); //prompt the user to type in the accpetable inputs
-                scan.next();            //accept the new value and loop... the loop will only be broken once an appropriate input is typed in
-            }
-        }//ends loop
-    }//ends main method
-    
-}//ends class
+import java.util.Scanner;
+import java.util.Random;
+  public class test{
+    public static int input(int grade){ // create a method for inputting error messages 
+     Scanner myScanner=new Scanner(System.in);
+     boolean flag=true;
+      while(flag){ 
+      if(myScanner.hasNextInt()){
+          while(flag){
+            grade=myScanner.nextInt();
+            if(grade>=0&&grade<=100){ 
+            flag=false;break;}
+            else{
+             System.out.println("ERROR: Please input an integer between 0-100.");// if input is not in range 0-100, then reinput
+             System.out.print("Please input again: ");
+             flag=true; }}}
+      else{
+      System.out.println("ERROR: Please input an integer."); // if input is not an integer, then reinput
+      System.out.print("Please input again: ");
+      myScanner.next();flag=true;}}
+   return grade; }
+      public static void printArray(int[] array){ // create a print method for array
+          for(int i=0;i<array.length;i++){
+              System.out.print(array[i]+" ");
+          }} 
+     
+     public static void sortedArray(int[] array){
+         for(int i=0;i<array.length;i++){ //rearrange the array to list from smallest to largest
+          for(int j=i+1;j<array.length;j++){
+            if(array[i]>=array[j]){
+             int temp=array[i];
+             array[i]=array[j];
+             array[j]=temp;
+            }}} 
+         }
+     public static void linearSearch(int[] array,int key){ // To check if the key is found or not found and say how many iterations are used
+         for(int i=0;i<array.length;i++){
+             if(array[i]==key){
+                 System.out.println(key+" was found in the list with "+(i+1)+" iterations");break;}
+             else if(i==array.length-1&&array[i]!=key){
+                 System.out.println(key+" was not found in the list with "+(i+1)+" iterations"); }
+              }
+         }
+      public static void scrambledArray(int[] array){  // create a method that scrambled the array
+          Random rand=new Random();// use java.util.random method to scramble the index number
+          for(int i=0;i<array.length;i++){
+              int num=rand.nextInt(15);
+             // swap the two different positioned values by swaping their index number 
+              int temp=array[i];
+              array[i]=array[num];
+              array[num]=temp; }
+      }
+      
+      public static void main(String[] args){  // Begining of the main method 
+  Scanner myScanner=new Scanner(System.in); // create a Scanner constructor
+  System.out.println("Enter 15 ints for final grades in CSE2: "); 
+  int[] grade=new int[15]; // create a int array to represent students' grades
+ for(int i=0;i<grade.length;i++){ 
+     grade[i]=input(0); //call input method to test for the valid of input
+     if(i==0){continue;}
+     else if(grade[i]==grade[i-1]){
+        System.out.println("ERROR: Please input a inequal number to the last one."); 
+        // if the input is equal to last one,then call the input method again
+        grade[i]=input(0);}
+     }
+  System.out.print("Here are the array that you input: ");
+  printArray(grade); // call the printArray method
+  sortedArray(grade); // call the sortedArray method to rearrange array in order
+  System.out.print("\n");
+  System.out.println("Sorted: ");
+  printArray(grade);// call the printArray method
+  System.out.print("\n");
+  System.out.print("Enter a grade to search for: ");// prompt the user for inputting a search key
+  int key=myScanner.nextInt();
+  linearSearch(grade,key); // call the linearSearch method
+  System.out.println("Scrambled: ");
+  scrambledArray(grade);// call the scrambled method
+  printArray(grade);// call the printArray method
+  System.out.print("\n");
+  System.out.print("Enter a grade to search for: ");// prompt the user for inputting a another search key
+  int key1=myScanner.nextInt();
+  linearSearch(grade,key1);// call the linearSearch method
+          
+      }// end of the main method
+      
+  }// end of the program
