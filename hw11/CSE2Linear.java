@@ -18,15 +18,21 @@ public static void main(String[] args) {
 	
 	int[] grade=new int[15]; //introduces method 
 	System.out.println("Enter 15 grades between 0-100"); //asks user to enter grades
-
+   
     for(int i=0;i<grade.length;i++){  //for loop assigning grades,
+             int place =0;
             if(scan.hasNextInt()){
                 grade[i]=scan.nextInt();
                 if(grade[i]<0||grade[i]>100){ //making sure number is inbetween 0 and 100
                     System.out.println("not between 0 and 100."); 
                     return;
                 }
-                
+                if(i>0){
+                    if (grade[i]<grade[i-1]){
+                        System.out.println("must be increasing");
+                        return;
+                    }
+                }
             }
             else{
                 System.out.println("Must be an int"); //making sure number is an int
@@ -37,15 +43,11 @@ public static void main(String[] args) {
    
      
     
-    System.out.println("Sorted array:"); 
-    sortedGrades(grade);  //sorting grades (see method)
-    showArray(grade); //priting grads (see method)
-    
     
     
     System.out.println("enter a grade to find");
     int search = scan.nextInt(); //prompts user to find grade, declares grade as "seach"
-    gradeSearch(grade,search); //runs search method (see method)
+    binarySearch(grade,search); //runs search method (see method)
     System.out.println();
     
     System.out.println("Scrambled Deck: ");
@@ -54,7 +56,7 @@ public static void main(String[] args) {
     
     System.out.println("enter another grade to find");
     int search2 = scan.nextInt(); //grade serach number 2
-    gradeSearch(grade, search2);
+    linearSearch(grade, search2);
     
     
     
@@ -78,7 +80,7 @@ public static void main(String[] args) {
             
         } 
     }
-    public static void gradeSearch(int [] grades, int found){ //uses a linear serach to check if grade equals "found" value
+    public static void linearSearch(int [] grades, int found){ //uses a linear serach to check if grade equals "found" value
         for(int i=0; i<15; i++){
             if(grades[i]==found){
                 System.out.println("grade was found with "+(i+1)+" iterations");
@@ -98,6 +100,30 @@ public static void main(String[] args) {
            int gradetemp = grades[j];
            grades[j]=grades[k]; //switching two random grades
            grades[k]=gradetemp;
+        }
+    }
+    public static void binarySearch(int [] grades, int found){
+        int first, last, middle; //defining first middle and last of array
+        first = 0;
+        last= grades.length;
+        middle= (grades.length)/2;
+        while (first<=last){ //so array doesnt run out
+            if (grades[middle]<found){ //if above middle, raise first
+                first = middle+1;
+                break;
+            }
+            else if(grades[middle]==found){ //if middle is value, it is found
+                System.out.println("found with "+(middle+1)+" itterations");
+                break;
+            }
+            else{  //if value is below middle, lower last
+                last=middle-1;
+                middle=last/2;
+                break;
+            }
+        }
+        if (first > last){ //if loop runs out and it is still not found, it isnt in array
+            System.out.println("not found in "+grades.length+" itterations");
         }
     }
           
